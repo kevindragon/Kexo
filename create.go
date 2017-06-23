@@ -2,6 +2,7 @@ package main
 
 import (
 	"io/ioutil"
+	"path"
 	"strings"
 	"time"
 )
@@ -22,10 +23,12 @@ var postTpl string = `---
 title: {{title}}
 date: {{date}}
 tags:
----`
+---
+
+`
 
 func createPost(identity string) {
-	filename := "source/_posts/" + identity + ".md"
+	filename := path.Join(POSTS_PATH, identity+".md")
 	now := time.Now()
 	date := now.Format("2006-01-02 15:04:05")
 	content := strings.Replace(postTpl, "{{title}}", identity, 1)
